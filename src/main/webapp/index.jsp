@@ -3,141 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NexusShop — Premium Store</title>
+<title>NexusShop — Premium UI</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root{
-    --bg:#f4f7fb;
+    --bg:#f8fafc;
     --primary:#0f172a;
-    --accent:#2563eb;
+    --accent:#6366f1;
+    --accent2:#8b5cf6;
     --muted:#64748b;
-    --card:rgba(255,255,255,0.7);
-    --border:rgba(0,0,0,0.05);
-    --shadow:0 10px 30px rgba(0,0,0,0.08);
-    --radius:14px;
+    --card:rgba(255,255,255,0.6);
+    --border:rgba(255,255,255,0.3);
+    --shadow:0 20px 60px rgba(0,0,0,0.08);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
     font-family:Inter,sans-serif;
-    background:linear-gradient(180deg,#eef2ff,#f8fafc);
+    background:linear-gradient(120deg,#eef2ff,#f8fafc);
     color:var(--primary);
 }
 
-/* HEADER */
+/* NAVBAR */
 header{
-    position:sticky;top:0;
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    max-width:1100px;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    padding:14px 25px;
     z-index:100;
 }
 
-.container{max-width:1200px;margin:auto;padding:0 20px}
-
-.header-inner{
-    display:flex;justify-content:space-between;
-    align-items:center;padding:15px 0;
-}
-
-.brand{font-weight:700;font-size:22px}
-.brand span{color:var(--accent)}
-
-.search{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:999px;
-    padding:8px 14px;
+.nav{
     display:flex;
-    width:260px;
+    justify-content:space-between;
+    align-items:center;
 }
-.search input{border:none;outline:none;width:100%}
+
+.brand{
+    font-weight:700;
+    font-size:20px;
+}
+.brand span{
+    background:linear-gradient(45deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
 
 /* HERO */
 .hero{
-    height:420px;
+    height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    color:white;
-    background:
-    linear-gradient(120deg,rgba(15,23,42,0.8),rgba(37,99,235,0.7)),
-    url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=1400&q=80');
-    background-size:cover;
+    flex-direction:column;
+    padding:20px;
 }
-.hero h1{font-size:48px;margin-bottom:10px}
-.hero p{max-width:600px;margin:auto;margin-bottom:20px}
+
+.hero h1{
+    font-size:56px;
+    font-family:Poppins;
+    background:linear-gradient(90deg,#0f172a,#6366f1);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:600px;
+    color:var(--muted);
+    margin-bottom:30px;
+    font-size:18px;
+}
 
 /* BUTTON */
 .btn{
-    padding:10px 18px;
-    border:none;
+    padding:14px 26px;
     border-radius:999px;
-    cursor:pointer;
+    border:none;
     font-weight:600;
+    cursor:pointer;
+    font-size:15px;
 }
+
 .btn-primary{
-    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
     color:white;
-    box-shadow:0 6px 20px rgba(37,99,235,0.4);
+    box-shadow:0 10px 30px rgba(99,102,241,0.4);
 }
+
 .btn-primary:hover{
-    transform:translateY(-2px);
+    transform:translateY(-3px) scale(1.03);
 }
 
-/* GRID */
-.grid{display:grid;gap:20px}
-.products{grid-template-columns:repeat(4,1fr);margin-top:40px}
+/* PRODUCTS */
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
 
-/* PRODUCT */
-.product{
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:30px;
+}
+
+/* CARD */
+.card{
     background:var(--card);
-    backdrop-filter:blur(10px);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
     overflow:hidden;
-    transition:0.3s;
+    box-shadow:var(--shadow);
+    transition:0.4s;
+    position:relative;
 }
-.product:hover{
-    transform:translateY(-8px);
+
+.card:hover{
+    transform:translateY(-12px) scale(1.02);
 }
-.product img{
-    width:100%;height:200px;
+
+/* glow effect */
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(99,102,241,0.2),transparent);
+    opacity:0;
+    transition:0.4s;
+}
+
+.card:hover::before{
+    opacity:1;
+}
+
+/* IMAGE */
+.card img{
+    width:100%;
+    height:200px;
     object-fit:cover;
     transition:0.4s;
 }
-.product:hover img{transform:scale(1.08)}
-
-.product-body{padding:15px}
-.product h5{margin-bottom:8px}
-
-.price{font-weight:700}
-
-.product-footer{
-    display:flex;gap:10px;padding:12px;
+.card:hover img{
+    transform:scale(1.1);
 }
 
-.add-btn{
-    flex:1;
+/* CONTENT */
+.card-body{
+    padding:18px;
+}
+
+.card h4{
+    margin-bottom:8px;
+}
+
+.price{
+    font-weight:700;
+    font-size:18px;
+}
+
+/* BUTTON INSIDE */
+.card button{
+    width:100%;
+    margin-top:12px;
+    padding:10px;
+    border:none;
+    border-radius:10px;
     background:linear-gradient(135deg,#0f172a,#1e293b);
     color:white;
-    border:none;
-    padding:10px;
-    border-radius:8px;
+    cursor:pointer;
 }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-    .products{grid-template-columns:repeat(2,1fr)}
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:40px;
+    color:var(--muted);
 }
+
+/* MOBILE */
 @media(max-width:600px){
-    .products{grid-template-columns:1fr}
-    .hero h1{font-size:30px}
+    .hero h1{font-size:34px}
 }
 </style>
 </head>
@@ -145,47 +202,45 @@ header{
 <body>
 
 <header>
-<div class="container header-inner">
+<div class="nav">
     <div class="brand">Nexus<span>Shop</span></div>
-    <div class="search">
-        <input type="text" placeholder="Search...">
-    </div>
+    <button class="btn btn-primary">Cart</button>
 </div>
 </header>
 
 <section class="hero">
-<div>
-    <h1>Premium Collection</h1>
-    <p>Discover modern products with stunning design and best quality.</p>
-    <button class="btn btn-primary">Shop Now</button>
-</div>
+    <h1>Experience Shopping</h1>
+    <p>Beautiful, modern and premium products crafted for the next generation.</p>
+    <button class="btn btn-primary">Explore Now</button>
 </section>
 
 <div class="container">
-<div class="grid products" id="products"></div>
+    <div class="grid" id="products"></div>
 </div>
 
+<footer>
+    © 2026 NexusShop — Premium Experience
+</footer>
+
 <script>
-const PRODUCTS=[
-{title:"iPhone 14 Pro",price:1099,img:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb"},
+const products=[
+{title:"iPhone 14 Pro",price:1099,img:"https://images.unsplash.com/photo-1601784551446"},
 {title:"MacBook Pro",price:1999,img:"https://images.unsplash.com/photo-1593642632823"},
 {title:"Headphones",price:299,img:"https://images.unsplash.com/photo-1600185365483"},
-{title:"Nike Shoes",price:150,img:"https://images.unsplash.com/photo-1542272604"},
+{title:"Sneakers",price:150,img:"https://images.unsplash.com/photo-1542291026"}
 ];
 
 const grid=document.getElementById("products");
 
-PRODUCTS.forEach(p=>{
+products.forEach(p=>{
     const el=document.createElement("div");
-    el.className="product";
+    el.className="card";
     el.innerHTML=`
         <img src="${p.img}">
-        <div class="product-body">
-            <h5>${p.title}</h5>
+        <div class="card-body">
+            <h4>${p.title}</h4>
             <div class="price">$${p.price}</div>
-        </div>
-        <div class="product-footer">
-            <button class="add-btn">Add to Cart</button>
+            <button>Add to Cart</button>
         </div>
     `;
     grid.appendChild(el);
